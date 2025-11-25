@@ -1,0 +1,15 @@
+
+Tobacco Heritage Locations in the Netherlands – Map Description
+Content Description
+
+This map visualises the spatial distribution of historical tobacco-related heritage sites in the Netherlands, with a particular concentration in and around Amerongen, Elst, and the Utrechtse Heuvelrug region. The mapped objects include traditional tabaksschuren (tobacco barns), former cigar factories, storage houses and other structures associated with the Dutch tobacco-growing tradition. Their typologies follow the categories commonly recognised in regional heritage inventories, such as Tabaksschuur, Tabakspakhuis, Tabakshofstede, and Sigarenfabriek. While the tobacco industry has largely disappeared since the mid-20th century, these structures serve as rare physical witnesses to a centuries-long agrarian economy that once shaped the landscape and local identity, as extensively described in the Nota Tabaksschuren by the Municipality of Utrechtse Heuvelrug
+
+Process Description
+
+The map was produced in R using sf, ggplot2 and rnaturalearth, combining national boundary data with two locally curated spatial datasets: Tobacco_Heritage.geojson and regions.geojson. Heritage points were symbolised by type using a harmonised visual language derived from your interactive web map, while the heritage regions were represented with a red outline to indicate historical cultivation zones. All geometry files were transformed to a unified CRS (EPSG:4326), cleaned, and overlaid onto a simplified administrative basemap of the Netherlands. The final output was rendered through a minimal cartographic style, preserving clarity and emphasizing the distribution patterns across the landscape.
+
+Data Sources & References
+
+The spatial data used in this map originates from two custom datasets: Tobacco_Heritage.geojson, containing geolocated heritage objects related to historical tobacco cultivation and processing, and regions.geojson, outlining the broader cultural-landscape zones historically associated with tobacco production. Historical interpretation and typological understanding were primarily informed by the Nota Tabaksschuren (Gemeente Utrechtse Heuvelrug, 2012), which provides extensive documentation on the evolution, architecture, and spatial patterns of tobacco barns in Amerongen and surrounding areas (see Chapters 2 and 3). National boundary data were sourced from Natural Earth.
+
+This mapping work was also developed in alignment with analytical frameworks used at Rijnboutt, an architecture and urban planning company engaged in the Urban Heritage adaptability project. Within this project, Rijnboutt applies a data-driven spatial analysis approach to understand, evaluate, and visualise cultural-historical assets within contemporary planning contexts. The inclusion of tobacco heritage mapping contributes to this broader methodology, emphasizing how regional heritage structures can be spatially catalogued, interpreted, and integrated into planning and design narratives.

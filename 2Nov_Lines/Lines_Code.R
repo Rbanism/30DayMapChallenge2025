@@ -4,13 +4,13 @@ library(magick)
 library(magrittr)
 library(grid)
 
-rbanism_logo <- image_read('Logos/Logo transparent background/Logo_White.png')
+rbanism_logo <- image_read('https://rbanism.org/assets/imgs/about/vi_l.jpg')
 
 # Data from: https://doi.org/10.5281/zenodo.11196161
 # Datapaper: https://journals.openedition.org/cybergeo/41791
 
-roads1810 <- read.csv("2Nov_Lines/data/roads_1810.csv")
-relays1810 <- read.csv("2Nov_Lines/data/relays_1810.csv")
+roads1810 <- read.csv("data/roads_1810.csv")
+relays1810 <- read.csv("data/relays_1810.csv")
 
 relays <- st_as_sf(relays1810, 
                    coords = c("COORDINATES_2154_X", "COORDINATES_2154_Y"))
@@ -71,39 +71,44 @@ for (i in 1:nrow(roads)){
   all_segment <- rbind(all_segment, one_seg)
 }
 
+plot(all_segment)
 
 #####################
 
 all_roads <- left_join(all_segment,roads)
 
-fr <- st_read("2Nov_Lines/data/fr.json") |>
+fr <- st_read("data/fr.json") |>
   st_union() 
 
 fr_lambert <- st_transform(fr, crs = 2154)
 
+
+
 ggplot() +
-  geom_sf(data=fr, fill = alpha("#F7931E", 0.99), col = NA) +
-  geom_sf(data = all_roads, aes(col = MAX_SLOPE), linewidth = 0.5) +
-  scale_colour_gradient(high="#11686C", low = "white") +
+  geom_sf(data=fr, fill = "gold", col = "white") +
+  geom_sf(data = all_roads, aes(col = MAX_SLOPE)) +
+  scale_colour_gradient(high="darkblue", low = "white") +
   theme_minimal() +
-  ggtitle("2 November: Lines. Horses, beware!\nPostal horse roads in 1810 France") +
+  ggtitle("#30DayMapChallenge. Lines\nPostal horse roads in 1810 France") +
   xlab(str_wrap("#30DayMapChallenge. Clémentine Cottineau-Mugadza, 2025. Source: Verdier, N., Giraud, T., Mimeur, C., & Bretagnolle, A. (2024). Postal horse relays and roads in France, from the 17th to the 19th centuries.Zenodo. https://doi.org/10.5281/zenodo.11196161")) +
   coord_sf(crs = sf::st_crs(2154)) +
   guides(col=guide_legend(title="Maximum slope (m)"), legend.position="bottom") +
-  theme(plot.background = element_rect(fill = alpha("#f5d89b", 0.9),
-                                     color = NA),
-    axis.title.x=element_text(family="Fira Code", hjust = 0, size=6,colour = "white"),
-        plot.title = element_text(face = "bold", family="Fira Code", size=14, colour = "white"),
-        legend.title = element_text(face = "bold", family="Fira Code", size=10, colour = "white"),
-        legend.text =element_text(family="Fira Code", size=8, colour = "white"),
+  theme(axis.title.x=element_text(family="Fira Code", hjust = 0, size=6,colour = "#00A99D"),
+        plot.title = element_text(family="Fira Code", size=14, colour = "#00A99D"),
+        legend.title = element_text(family="Fira Code", size=10, colour = "#93278F"),
+        legend.text =element_text(family="Fira Code", size=8, colour = "#93278F"),
         axis.line =  element_blank(),
-       plot.margin = margin(10, 20, 10, 20),
-    axis.text =  element_blank(),
+        axis.text =  element_blank(),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_blank(),
         panel.background = element_blank())
 
+
+
 grid.raster(rbanism_logo,
-            x = 0.82, y=0.12,
-            width = unit(40, "points"))
+            x = 0.88, y=0.1,
+            width = unit(100, "points"))
+ggsave(filename = "Lines.png",
+       width = 8, height = 8, dpi = 300)
+
