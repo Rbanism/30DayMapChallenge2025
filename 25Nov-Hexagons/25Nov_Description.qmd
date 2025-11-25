@@ -1,0 +1,20 @@
+---
+title: "25Nov_Description"
+format: html
+author: Soroush
+---
+
+# 25 November - Hexagons : MCDA Analysis of Water Network in Dresden
+
+## Content of the map
+
+The map is the visualization of **Multi-Criteria Decision Analysis (MCDA)** scores of Dresden's streams and Elbe river based on specific criteria defined by the project team working on stream restorations. The water network was divided into spatial units with 250m diameter shaped in Hexagons for a better partitioning of overlapping zones of the study area. The indicators were Quality_of_Life, Climate_Adaptation and Biodiversity. The Spatial units consisting of water body were extracted and filled with given score of each criteria. The final scores were collected and calculated in MCDA matrix and entered into the hexagons as synthsized values that is visualized in the final map.
+
+## References
+
+-   Spatial Units with MCDA from [Unpacking Dresden Project](https://github.com/sdgis-edu-tud/report-asa2025-groupf.git)
+-   Dresden's Administrative Boundary from OpenStreetMap plug-in in QGIS, June, 2025.
+
+## Process
+
+The the spatial units and Dresden's municipality boundary were assigned as specific values. Then, their CRS was transformed to **EPSG: 25832**, suitable for Germany projections. After that, the attributes containing the name of the boundary, in our case Dresden, was looked up using `head()` and `unique()` functions to locate the attribute containing the value of "Dresden" before filtering. At the plotting step, the hexagons attribute containing the **MCDA** score was chosen and the values were visualized in a continuous way using the `scale_fill_viridis_c` by defining the visualization option of 'magma'. At last, the map with description is plotted.
